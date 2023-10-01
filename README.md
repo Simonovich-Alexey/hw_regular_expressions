@@ -31,10 +31,3 @@ with open("phonebook.csv", "w") as f:
 ## Вместо contacts_list подставьте свой список:
     datawriter.writerows(contacts_list)
 ```
-
-Домашнее задание сдавайте ссылкой на репозиторий [BitBucket](https://bitbucket.org/) или [GitHub](https://github.com/).
-
-Мы не сможем проверить, если вы пришлёте:
-* архивы,
-* скриншоты кода,
-* теоретический рассказ о возникших проблемах.
