@@ -2,7 +2,7 @@ import csv
 import re
 
 
-contact_result = []
+contact_list = []
 with open("phonebook_raw.csv", encoding='utf-8') as f:
     rows = csv.reader(f, delimiter=",")
     for i in rows:
@@ -20,8 +20,19 @@ with open("phonebook_raw.csv", encoding='utf-8') as f:
         pattern_phone = r"(\+7|8)\s*\(*(\d{3})\)*[\s-]*(\d{3})[\s-]*(\d{2})[\s-]*(\d{2})(\s*)\(*(\w+.)*\s*(\d+)*"
         result_phone = re.sub(pattern_phone, r"+7(\2)\3-\4-\5\6\7\8", result_name_3)
 
-        contact_result.append(result_phone.split(', '))
+        contact_list.append(result_phone.split(', '))
+
+dict_contacts = {}
+for item in contact_list:
+    unique = f"{item[0]} {item[1]} {item[2]}"
+    if unique in dict_contacts:
+        for ids, value in enumerate(dict_contacts.get(unique)):
+            if not value:
+                dict_contacts.get(unique)[ids] = item[ids]
+    else:
+        dict_contacts.update({unique: [item[0], item[1], item[2], item[3], item[4], item[5], item[6]]})
+
 
 with open("phonebook.csv", "w", encoding='utf-8') as f:
-    datawriter = csv.writer(f, delimiter=',')
-    datawriter.writerows(contact_result)
+    datawriter = csv.writer(f, delimiter=',', lineterminator="\r")
+    datawriter.writerows([value for value in dict_contacts.values()])
