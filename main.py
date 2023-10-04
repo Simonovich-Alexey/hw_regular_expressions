@@ -24,7 +24,7 @@ with open("phonebook_raw.csv", encoding='utf-8') as f:
 
 dict_contacts = {}
 for item in contact_list:
-    unique = f"{item[0]} {item[1]} {item[2]}"
+    unique = f"{item[0]} {item[1]}"
     if unique in dict_contacts:
         for ids, value in enumerate(dict_contacts.get(unique)):
             if not value:
